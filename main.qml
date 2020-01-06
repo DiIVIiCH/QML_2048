@@ -28,7 +28,10 @@ ApplicationWindow {
             //! [next]
             Button {
                 text: qsTr("New Game")
-                onClicked: board.model.start_game()
+                onClicked: {
+                    board.model.start_game()
+                    board.forceActiveFocus()
+                }
             }
             //! [next]
 
@@ -42,7 +45,7 @@ ApplicationWindow {
 
 
             Text {
-                text: qsTr("HighScore: ")
+                text: qsTr("HighScore: " + board.model.highscore)
                 //onClicked: timer.running = !timer.running
             }
         }

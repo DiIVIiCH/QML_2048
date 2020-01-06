@@ -39,6 +39,7 @@ void Board::start_game()
 	place_tile();
 	place_tile();
 	emit dataChanged(createIndex(0,0), createIndex(m_board_dimension, m_board_dimension));
+	emit highscore_changed();
 }
 
 void Board::move(Qt::Key key)
@@ -51,15 +52,13 @@ void Board::move(Qt::Key key)
 	}
 
 	if (is_changed){
-		qDebug() << m_highscore;
-		if (can_move()){
-			place_tile();
-		}
-		else{
+		place_tile();
+		emit dataChanged(createIndex(0,0), createIndex(m_board_dimension, m_board_dimension));
+		emit highscore_changed();
+		is_changed = false;		
+		if (!can_move()){
 			end_game();
 		}
-		is_changed = false;
-		emit dataChanged(createIndex(0,0), createIndex(m_board_dimension, m_board_dimension));
 	}
 }
 
@@ -200,7 +199,7 @@ void Board::move_down()
 
 void Board::end_game()
 {
-
+	qDebug() << "Game Over!";
 }
 
 bool Board::is_board_full()

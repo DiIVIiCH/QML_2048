@@ -8,7 +8,7 @@ class Board: public QAbstractTableModel
 
 	Q_OBJECT
 	Q_PROPERTY(int dimension READ rowCount CONSTANT)
-	Q_PROPERTY(int highscore READ highscore CONSTANT)
+	Q_PROPERTY(int highscore READ highscore CONSTANT NOTIFY highscore_changed)
 public:
 
 	static constexpr int DEFAULT_DIMENSION {4};
@@ -31,7 +31,8 @@ public:
 	Q_INVOKABLE void end_game();
 
 	size_t highscore() const;
-
+signals:
+	void highscore_changed();
 private:
 
 	bool is_changed = true;
