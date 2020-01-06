@@ -1,5 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QAbstractTableModel>
+#include "board.h"
 
 int main(int argc, char *argv[])
 {
@@ -8,6 +10,8 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+
+    qmlRegisterType<Board>("TableModel", 0, 1, "TableModel");
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
@@ -18,3 +22,4 @@ int main(int argc, char *argv[])
 
     return app.exec();
 }
+
