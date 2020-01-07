@@ -73,11 +73,10 @@ ApplicationWindow {
         contentWidth:  board_size
         model: TableModel {}
 
-
         delegate: Tile{
             implicitWidth: (root.width-board.leftMargin*2 - board.columnSpacing*3)/board.model.dimension
             implicitHeight: (root.width-board.leftMargin*2 - board.columnSpacing*3)/board.model.dimension
-            color: colors[display]
+            mainColor: colors[display]
         }
 
 
