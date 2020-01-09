@@ -1,5 +1,6 @@
 import QtQuick 2.12
 Item{
+    objectName: "Tile"
     id: root
     property var mainColor: ""
     property var newX: ""
@@ -30,8 +31,17 @@ Item{
             anchors.centerIn: mainTile
             font.pixelSize: 30
 
-        }
+            onTextChanged: {
 
+                if (update_role){
+                    updateScaleAnimation.start();
+                }
+                if (new_cell){
+                    newScaleAnimation.start();
+                }
+            }
+
+        }
 
         NumberAnimation on x{
             id: moveAnimationX
@@ -47,18 +57,35 @@ Item{
         }
 
         SequentialAnimation{
-            id: scaleAnimation
+            id: updateScaleAnimation
+
             ScaleAnimator{
                 target: mainTile
                 from: 1.0;
                 to: 1.1;
-                duration: 100
+                duration: 150
             }
             ScaleAnimator{
                 target: mainTile
                 from: 1.1;
                 to: 1.0;
-                duration: 100
+                duration: 50
+            }
+        }
+
+        SequentialAnimation{
+            id: newScaleAnimation
+            ScaleAnimator{
+                target: mainTile
+                from: 0.0;
+                to: 0.0;
+                duration: 150;
+            }
+            ScaleAnimator{
+                target: mainTile
+                from: 0.5;
+                to: 1.0;
+                duration: 200
             }
         }
     }

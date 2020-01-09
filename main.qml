@@ -57,6 +57,7 @@ ApplicationWindow {
 
     TableView {
         id: board
+        objectName: "grid"
         anchors.fill: parent
         columnSpacing: 16
         rowSpacing: columnSpacing
@@ -65,7 +66,7 @@ ApplicationWindow {
         rightMargin: leftMargin
         topMargin: leftMargin
         bottomMargin: leftMargin
-        focus: true
+        focus: model.game_active
 
         property int board_size: Math.min(root.width, root.height)
 
@@ -78,8 +79,6 @@ ApplicationWindow {
             implicitHeight: (root.width-board.leftMargin*2 - board.columnSpacing*3)/board.model.dimension
             mainColor: colors[display]
         }
-
-
 
         Keys.onPressed: {
            board.model.move(event.key)
